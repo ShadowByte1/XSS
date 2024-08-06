@@ -17,8 +17,14 @@ Check if any value you control (parameters, path, headers, cookies) is reflected
 # Determine Reflection Context
 
 Raw HTML: Can you create new HTML tags or use attributes/events that support JavaScript?
+
+
 Inside HTML Tag: Can you exit to raw HTML or create events/attributes to execute JavaScript?
+
+
 Inside JavaScript Code: Can you escape the <script> tag or string context to execute arbitrary JavaScript?
+
+
 4. Contexts for XSS Injection
 Raw HTML Context
 When your input is reflected in the raw HTML of a page, you can exploit it by injecting HTML tags that execute JavaScript. Common tags include:
