@@ -634,6 +634,7 @@ event: message\ndata: <script>alert('XSS via EventSource')</script>\n\n
 
 CSS Content Property Injection
 If an application allows user input in CSS properties without sanitization, it can lead to XSS.
+Note:most browsers consider the content property text not html and this works under very certain conditions unsure whether the browser still accepts this however i have inserted here as a use case.
 ```
 <style>
   .content::before { content: '<img src=x onerror=alert("XSS via CSS Content Property")>'; }
